@@ -1,0 +1,18 @@
+# Core scientific stack
+numpy>=1.24
+scipy>=1.10
+matplotlib>=3.7
+pandas>=2.0
+jupyter>=1.0
+ipykernel>=6.0
+
+# Photonic design automation
+gdsfactory>=7.0
+
+# Optional: electromagnetic simulation (requires separate system install on some platforms)
+# meep can be installed via conda: conda install -c conda-forge pymeep
+# Uncomment below only if using pip-based meep build:
+# meep>=1.25
+
+# Utilities
+tqdm>=4.65
