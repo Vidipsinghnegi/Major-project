@@ -1,0 +1,19 @@
+We have demonstrated an 8-channel DWDM demultiplexer based on thermally
+tunable racetrack microring resonators on the \SI{220}{\nano\meter} SOI
+platform.  The key results are:
+\begin{itemize}
+  \item An open-source gdsfactory script generates foundry-ready GDSII
+        layouts for arbitrary channel counts with a single command.
+  \item MEEP FDTD simulations confirm ER\,$>\,$\SI{20}{\decibel},
+        IL\,$<$\,\SI{0.25}{\decibel}, $Q\,>\,9{,}600$ for all channels, and
+        inter-channel crosstalk\,$<$\,\SI{-28}{\decibel}.
+  \item TiN microheater integration provides \SI{688}{\pico\meter\per\milli\watt}
+        thermal tuning efficiency with negligible thermal crosstalk at a
+        \SI{100}{\micro\meter} channel pitch.
+  \item All design, simulation, and visualisation scripts are released
+        openly to enable direct reproduction and extension.
+\end{itemize}
+
+Future work will include experimental fabrication on a commercial MPW
+platform, direct measurement of heater efficiency, and extension to
+16/32-channel configurations with integrated waveguide photodetectors.

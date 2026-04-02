@@ -1,0 +1,80 @@
+\subsection{SOI Waveguide Platform}
+The device is built on the standard \SI{220}{\nano\meter}
+silicon-on-insulator (SOI) platform with a \SI{2}{\micro\meter} buried
+oxide (BOX) layer.  Strip waveguides with a cross-section of
+\SI{500}{\nano\meter} $\times$ \SI{220}{\nano\meter} support a single
+quasi-transverse-electric (TE) mode at \SI{1550}{\nano\meter} with a
+simulated effective index $n_\text{eff} = 2.437$ and group index
+$n_g = 4.182$.
+
+\subsection{Racetrack Geometry}
+A racetrack resonator consists of two straight coupling sections of
+length $L_c$ connected by two semicircular bends of radius $R$.  The
+total round-trip optical path length is
+\begin{equation}
+  L_\text{rt} = 2 L_c + 2\pi R.
+  \label{eq:roundtrip}
+\end{equation}
+Resonance occurs when $L_\text{rt}$ is an integer multiple of the
+effective wavelength:
+\begin{equation}
+  m\lambda_m = n_\text{eff}(\lambda_m)\,L_\text{rt},
+  \label{eq:resonance}
+\end{equation}
+where $m$ is the longitudinal mode order.  Table~\ref{tab:params} lists
+the nominal design parameters for the eight-channel demultiplexer.
+
+\begin{table}[!t]
+\caption{Racetrack MRR Design Parameters}
+\label{tab:params}
+\centering
+\begin{tabular}{lSs}
+\toprule
+\textbf{Parameter} & \textbf{Value} & \textbf{Unit} \\
+\midrule
+Waveguide width $w$            & 500  & \nano\meter \\
+Waveguide height $h$           & 220  & \nano\meter \\
+Bend radius $R$                & 10   & \micro\meter \\
+Coupling-section length $L_c$  & 15   & \micro\meter \\
+Gap $g$ (bus--ring)            & 150  & \nano\meter \\
+Gap $g$ (ring--drop)           & 150  & \nano\meter \\
+Round-trip length $L_\text{rt}& 92.83& \micro\meter \\
+FSR (at \SI{1550}{\nano\meter})& 6.19 & \nano\meter \\
+TiN heater width               & 1    & \micro\meter \\
+TiN heater thickness           & 100  & \nano\meter \\
+Heater offset above waveguide  & 1    & \micro\meter \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Coupling-Region Design}
+The power coupling coefficient $\kappa^2$ is engineered via the gap $g$
+and coupling length $L_c$ to achieve critical coupling at each
+resonance wavelength, minimising through-port transmission to zero and
+maximising drop-port power.  The coupling coefficient relates to the
+transmission matrix of the directional coupler~\cite{okamoto2006fundamentals}:
+\begin{equation}
+  \begin{pmatrix} E_\text{out,1} \\ E_\text{out,2} \end{pmatrix}
+  =
+  \begin{pmatrix} t & j\kappa \\ j\kappa & t \end{pmatrix}
+  \begin{pmatrix} E_\text{in,1} \\ E_\text{in,2} \end{pmatrix},
+  \label{eq:coupler}
+\end{equation}
+where $t^2 + \kappa^2 = 1$ for a lossless coupler.
+
+For a symmetric add-drop ring, the critical-coupling condition requires
+$|t| = a^{1/2}$, where $a$ is the round-trip field amplitude transmission
+(related to the propagation loss $\alpha$ by $a = e^{-\alpha L_\text{rt}/2}$).
+
+\subsection{Channel-to-Channel Spacing}
+Eight ITU C-band channels centred at \SIlist{1544.5; 1545.3; 1546.1;
+1546.9; 1547.7; 1548.5; 1549.3; 1550.1}{\nano\meter}
+(\SI{100}{\giga\hertz} grid) are targeted.  To fit all resonances within
+one FSR, the straight-section lengths are individually adjusted by
+\begin{equation}
+  \Delta L_c^{(k)} = \frac{(k-1)\Delta\lambda_\text{ch}\,n_g}
+                          {n_g - n_\text{eff}}\,\frac{L_\text{rt}}{2R},
+  \label{eq:delta_lc}
+\end{equation}
+where $k \in \{1,\ldots,8\}$ is the channel index and
+$\Delta\lambda_\text{ch} \approx \SI{0.8}{\nano\meter}$.

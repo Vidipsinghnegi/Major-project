@@ -1,0 +1,54 @@
+Full-wave FDTD simulations are performed using MEEP
+(MIT Electromagnetic Equation Propagation)~\cite{oskooi2010meep}, an
+open-source C++/Python FDTD package.  The simulation workflow consists
+of three stages: (i)~mode-source computation to identify the fundamental
+TE mode at each frequency, (ii)~time-domain propagation to compute the
+S-parameters, and (iii)~post-processing to extract the spectral response
+and performance metrics.
+
+\subsection{Simulation Domain}
+A 2-D cross-sectional simulation in the $xy$-plane is used for rapid
+modal analysis, while 3-D simulations of the full racetrack geometry
+(with a $z$-dimension that captures the SOI slab mode profile) are used
+for accurate insertion-loss prediction.  Perfectly matched layer (PML)
+boundary conditions of thickness \SI{1}{\micro\meter} surround the
+computational domain.
+
+\subsection{Simulation Resolution and Materials}
+A spatial resolution of \SI{20}{\nano\meter} (corresponding to
+50~pixels\,/\,\SI{}{\micro\meter}) is used in 2-D and \SI{50}{\nano\meter}
+in 3-D.  Material dispersions are modelled using Sellmeier fits:
+\begin{itemize}
+  \item \emph{Silicon}:
+        $n_\text{Si}(\lambda) = \sqrt{11.97 +
+        \tfrac{0.939}{\lambda^2 - 0.028}}$ (wavelength in \si{\micro\meter})
+  \item \emph{SiO\textsubscript{2}}:
+        $n_\text{SiO_2}(\lambda) = \sqrt{1 +
+        \tfrac{0.696\lambda^2}{\lambda^2-0.0047} +
+        \tfrac{0.408\lambda^2}{\lambda^2-0.013} +
+        \tfrac{0.897\lambda^2}{\lambda^2-97.9}}$
+\end{itemize}
+
+\subsection{Thermal Refractive Index Model}
+Temperature-dependent resonance tuning is modelled by applying a
+spatially uniform perturbation $\Delta n_\text{Si}$ to the silicon
+refractive index across the waveguide cross-section:
+\begin{equation}
+  \Delta n_\text{Si}(T) = \frac{dn}{dT}\,\Delta T,
+  \quad \frac{dn}{dT}\bigg|_\text{Si} = \SI{1.84e-4}{\per\kelvin},
+  \label{eq:thermo_optic}
+\end{equation}
+which produces a resonance shift
+\begin{equation}
+  \Delta\lambda_\text{res} = \frac{\lambda_\text{res}}{n_g}\,
+  \Gamma\,\frac{dn}{dT}\,\Delta T,
+  \label{eq:resonance_shift}
+\end{equation}
+where $\Gamma$ is the confinement factor of the waveguide mode in silicon.
+
+\subsection{S-Parameter Extraction}
+Flux planes are placed at the input port (port 1), through port (port 2),
+and drop port (port 3).  After a normalisation run (straight waveguide),
+the through-port transmission $T_\text{through} = |S_{21}|^2$ and
+drop-port transmission $T_\text{drop} = |S_{31}|^2$ are computed over
+the wavelength range \SIrange{1530}{1565}{\nano\meter}.

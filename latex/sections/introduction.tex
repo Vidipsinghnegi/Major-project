@@ -1,0 +1,57 @@
+Silicon photonics has emerged as a leading platform for large-scale
+photonic integration owing to its compatibility with complementary
+metal-oxide-semiconductor (CMOS) fabrication infrastructure, high
+index contrast, and the availability of multi-project wafer (MPW)
+services~\cite{reed2010silicon, bogaerts2012silicon}.  Among the
+building blocks of silicon photonic integrated circuits (PICs), microring
+resonators (MRRs) and their elongated variants---racetrack
+resonators---play a pivotal role in wavelength-selective routing,
+filtering, modulation, and sensing~\cite{little1997microring,
+yariv2000critical}.
+
+Dense wavelength division multiplexing (DWDM) leverages the high
+spectral efficiency of closely spaced optical channels to maximise
+the information capacity of a single fibre or waveguide
+bus~\cite{winzer2012optical}. In the C-band,
+the International Telecommunication Union (ITU) G.694.1 standard
+defines a \SI{100}{\giga\hertz} (\SI{\sim 0.8}{\nano\meter}) channel
+grid, placing stringent requirements on the resonance wavelength
+accuracy and thermal stability of ring-based demultiplexers.
+
+Thermal tuning via integrated microheaters is the most widely adopted
+post-fabrication technique for compensating fabrication-induced
+resonance shifts and for dynamic channel
+assignment~\cite{dong2010thermally, watts2013adiabatic}. Titanium
+nitride (TiN) is preferred as the heater material in CMOS-compatible
+flows because of its low electrical resistivity, mechanical stability,
+and optical absorption properties that minimise parasitic waveguide
+loss~\cite{sacher2014wide}.
+
+Despite the broad literature on individual ring modulators and switches,
+a complete open-source workflow---from parametric GDSII layout generation
+through electromagnetic simulation to manuscript-ready figures---for a
+multi-channel DWDM demultiplexer based on racetrack MRRs is still
+lacking.  This paper addresses that gap with the following contributions:
+
+\begin{enumerate}
+  \item A parametric gdsfactory-based design script that generates
+        foundry-ready GDSII layouts for a configurable number of ITU
+        C-band channels (Section~\ref{sec:layout}).
+  \item Full-wave FDTD simulation using MEEP of the through- and
+        drop-port spectral responses, including temperature-dependent
+        refractive index shifts (Section~\ref{sec:simulation}).
+  \item Systematic extraction of key performance metrics: extinction
+        ratio (ER), insertion loss (IL), quality factor $Q$, free
+        spectral range (FSR), and inter-channel crosstalk
+        (Section~\ref{sec:results}).
+  \item Characterisation of the thermal tuning efficiency and power
+        budget for a \SI{\pm 2}{\nano\meter} tuning range
+        (Section~\ref{sec:thermal}).
+\end{enumerate}
+
+The remainder of the paper is organised as follows.
+Section~\ref{sec:design} introduces the device architecture and
+physical parameters.  Section~\ref{sec:layout} describes the automated
+layout generation flow.  Sections~\ref{sec:simulation}--\ref{sec:thermal}
+present the simulation methodology and results.
+Section~\ref{sec:conclusion} concludes the paper.
